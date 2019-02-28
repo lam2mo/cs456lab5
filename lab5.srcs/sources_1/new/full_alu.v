@@ -6,8 +6,31 @@ module full_alu (
     output out,
     output carry_out
 );
-    // Insert your RTL here to calculate the alu out and carry out bits
-    // Remove these assign statements once you write your own RTL
-    assign out = 1'b0;
-    assign carry_out = 1'b0;
+
+    // basic gates
+    wire and_ab;
+    wire or_ab;
+    wire xor_ab;
+    and(and_ab, a, b);
+    or (or_ab, a, b);
+    xor(xor_ab, a, b);
+    
+    // sum
+    wire sum_abc;
+    xor(sum_abc, xor_ab, carry_in);   // a + b + c (lsb)
+    
+    // mux
+    wire sel_and;
+    wire sel_or;
+    wire sel_add;
+    and(sel_and, and_ab,  ~sel[0], ~sel[1]);
+    and(sel_or,  or_ab,    sel[0], ~sel[1]);
+    and(sel_add, sum_abc, ~sel[0],  sel[1]);
+    or(out, sel_and, sel_or, sel_add);
+    
+    // carry
+    wire csum;
+    and(csum, carry_in, xor_ab);
+    or(carry_out, and_ab, csum);      // a + b + c (msb)
+
 endmodule

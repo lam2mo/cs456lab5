@@ -7,7 +7,7 @@
 // Module: z1top.v 
 //----------------------------------------------------------------------------
 module z1top (
-    input CLK_125MHZ_FPGA,
+    input sysclk,
     input [3:0] BUTTONS,
     input [1:0] SWITCHES,
     output [5:0] LEDS
@@ -45,7 +45,7 @@ module z1top (
         .alu_operand2(alu_operand2),
         .structural_alu_out(structural_out),
         .behavioral_alu_out(behavioral_out),
-        .clk(CLK_125MHZ_FPGA),
+        .clk(sysclk),
         .test_fail(test_fail)
     );
 endmodule
