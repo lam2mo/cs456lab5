@@ -3,6 +3,7 @@ module alu_tester (
     output [13:0] alu_operand2,
     input [14:0] structural_alu_out,
     input [14:0] behavioral_alu_out,
+    input [1:0] sel,
     input clk,
     output test_fail
 );
