@@ -7,24 +7,28 @@ module alu_testbench();
     always #(2) clock <= ~clock;
     // Self test of the structural alu
     wire [13:0] alu_operand1, alu_operand2;
+    wire [1:0] alu_sel;
     wire [14:0] structural_alu_out, behavioral_alu_out;
     wire test_fail;
 
     structural_alu structural_test_alu (
         .a(alu_operand1),
         .b(alu_operand2),
+        .sel(alu_sel),
         .out(structural_alu_out)
     );
 
     behavioral_alu behavioral_test_alu (
         .a(alu_operand1),
         .b(alu_operand2),
+        .sel(alu_sel),
         .out(behavioral_alu_out)
     );
 
     alu_tester tester (
         .alu_operand1(alu_operand1),
         .alu_operand2(alu_operand2),
+        .sel(alu_sel),
         .structural_out(structural_alu_out),
         .behavioral_out(behavioral_alu_out),
         .clk(clock),
