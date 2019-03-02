@@ -28,7 +28,6 @@ module alu_testbench();
     alu_tester tester (
         .alu_operand1(alu_operand1),
         .alu_operand2(alu_operand2),
-        .sel(alu_sel),
         .structural_out(structural_alu_out),
         .behavioral_out(behavioral_alu_out),
         .clk(clock),
